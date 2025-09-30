@@ -1,6 +1,6 @@
-body {
+body{
     font: 100%/1.5 system-ui;
-  }
+}
 
 h1{
     font-family: Arial, Helvetica, sans-serif;
@@ -10,4 +10,8 @@ h1{
 p{
     font-family: Arial, Helvetica, sans-serif;
     font-family: 12px;
+}
+
+.headshot-img{
+    size: 50%;
 }
