@@ -13,6 +13,16 @@ p{
 }
 
 .headshot-img{
-    max-width: 50%;
+    max-width: 25%;
     height: auto;
+    float: right;
+}
+
+.header{
+    padding: 2%;
+    flex-direction: row;
+}
+
+.header-name, .career-profile{
+    float: left; 
 }
