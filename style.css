@@ -41,7 +41,7 @@ img {
     border-bottom: 0.4em solid var(--color-accent);
 }
 
-input, textarea, button, select{
+input, textarea, select{
     font: inherit;
 }
 
@@ -65,4 +65,15 @@ form textarea {
     padding: 0.5em;
     border: 1px solid oklch(80% 3% 200);
     border-radius: 0.5em;
+}
+
+form button{
+    font: inherit;
+    padding: 0.5em;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
