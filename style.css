@@ -41,43 +41,7 @@ img {
     border-bottom: 0.4em solid var(--color-accent);
 }
 
-input, textarea, select{
-    font: inherit;
-}
-
 form{
-    margin: 2em auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;  
-}
-
-form label{
-    display: block;
-    margin-block: 0.4em;
-}
-
-form input,
-form textarea {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.5em;
-    border: 1px solid oklch(80% 3% 200);
-    border-radius: 0.5em;
-}
-
-button{
-    font: inherit;
-    padding: 0.5em;
-    background-color: var(--color-accent);
-    color: white;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: color-mix(in oklch, var(--color-accent) 80%, black);
+    display: grid;
+    grid-template-columns: auto 1fr
 }
