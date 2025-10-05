@@ -17,4 +17,9 @@ nav {
 .nav-bar a{
     display: flex;
     flex: 1;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
 }
