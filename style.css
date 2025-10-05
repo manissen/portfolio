@@ -3,6 +3,7 @@ body{
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
     padding: 2%;
+    accent-color: #667b68;
 }
 
 img {
@@ -24,4 +25,12 @@ nav {
 
 .nav-bar a{
     display: flex;
+}
+
+.current {
+    border-bottom-width: 0.4em;
+}
+
+a:hover {
+    background-color: #cad2ca
 }
