@@ -14,7 +14,7 @@ nav {
     display: flex;
 }
 
-.nav-bar {
+.nav-bar a{
     display: flex;
     flex: 1;
 }
