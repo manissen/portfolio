@@ -28,7 +28,7 @@ img {
     padding: 0.5em;
     text-decoration: none;
     color: inherit;
-    border-bottom: 0.4em solid transparent;
+    border-bottom: 0.4em transparent;
 }
 
 .nav-bar a.current {
