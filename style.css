@@ -32,5 +32,5 @@ nav {
 }
 
 a:hover {
-    background-color: oklch(from var(--color-accent) 95% 5% h);
+    background-color: oklch(#667b68 95% 5% h);
 }
