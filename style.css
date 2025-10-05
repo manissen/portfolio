@@ -4,3 +4,8 @@ body{
     margin-inline: max(1em, (100% - 100ch) / 2);
     padding: 2%;
 }
+
+img {
+    width: 50%;
+    height: auto;
+  }
