@@ -6,7 +6,7 @@ body{
     font: 100%/1.5 system-ui;
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
-    padding: 2%;
+    padding: 0.4em;
     accent-color: var(--color-accent);
 }
 
@@ -32,7 +32,6 @@ img {
 
 .nav-bar a.current {
     border-bottom: 0.4em solid oklch(80% 3% 200);
-    padding-bottom: calc(0.5em - 0.4em);
 }
 
 .nav-bar a:hover {
