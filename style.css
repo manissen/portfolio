@@ -10,6 +10,15 @@ body{
     accent-color: var(--color-accent);
 }
 
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: 400%;
+}
+
 img {
     width: 90%;
     height: auto;
