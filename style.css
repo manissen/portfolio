@@ -140,5 +140,8 @@ section > header h2 {
 section a{
     text-decoration: none;
     font: inherit;
-    color: var(--color-accent);
+    background-color: var(--color-accent);
+    padding: 0.5em;
+    color: beige;
+    border-radius: 0.25em;
 }
