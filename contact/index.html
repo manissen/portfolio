@@ -5,21 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Info</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="global.js" type="module"></script>
+    <script src="../global.js" type="module"></script>
 </head>
 <body>
-    <nav class="nav-bar">
-        <a href="../index.html">Home</a>
-        <a href="../projects/index.html">Projects</a>
-        <a href="index.html" class="current">Contact</a>
-        <a href="../resume/index.html">Resume</a>
-        <a href="https://github.com/manissen/" target="_blank">GitHub</a>
-    </nav>
     <h1>Contact Info</h1>
-    <form action="mailto:margotn833@gmail.com" method="POST" enctype="text/plain">
-        <label>Email<input name="email" type="email"></label>
-        <label>Subject<input name="subject"></label>
-        <label>Message<textarea name="body"></textarea></label>
+    <form action="mailto:margotn833@gmail.com">
+        <label>Email<input name="email" type="email" required></label>
+        <label>Subject<input name="subject" required></label>
+        <label>Message<textarea name="body" required></textarea></label>
         <button>Submit</button>
     </form>
 </body>
