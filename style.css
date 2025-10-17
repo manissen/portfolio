@@ -3,18 +3,22 @@
     --color-accent: #3E4C6C;
     --border-color: oklch(50% 10% 200 / 40%);
     --text-color: var(--color-accent);
-}
-
-@media (prefers-color-scheme: dark) {
+  }
+  
+  @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: beige;
-        --border-color: oklch(50% 10% 200 / 40%);
+      --text-color: beige;
+      --color-accent: #9aa5d0;
+      --border-color: oklch(80% 10% 200 / 40%);
     }
-}
+  
+    body {
+      background-color: #111;
+      --text-color: beige;
+    }
+  }
 
 body {
-    background: canvas;
-    color: var(--text-color);
     font: 100%/1.5 system-ui;
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
@@ -113,13 +117,13 @@ input, textarea, button, select {
 
 form button {
     grid-column: 1 / -1;
-    background-color: var(--color-accent);
-    color: var(--text-color);
+    background-color: var(--text-color);
+    color: beige;
 }
 
 button:hover, select:hover {
     background-color: color-mix(in oklch, var(--color-accent), canvas 20%);
-    color: var(--text-color);
+    color: beige;
 }
 
 .projects {
