@@ -40,7 +40,7 @@ function $$(selector, context = document) {
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/"              // local dev
-    : "/website/";     // GitHub Pages repo name (adjust as needed)
+    : "/portfolio/";     // GitHub Pages repo name (adjust as needed)
 
 // Pages for nav
 const pages = [
