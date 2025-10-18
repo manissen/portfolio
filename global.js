@@ -39,8 +39,8 @@ function $$(selector, context = document) {
 // Base path for local vs GitHub Pages
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "/"              // local dev
-    : "/portfolio/";     // GitHub Pages repo name (adjust as needed)
+    ? "/"              
+    : "/portfolio/"; 
 
 // Pages for nav
 const pages = [
