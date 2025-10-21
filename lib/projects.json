@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Predicting Recipe Health",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "This DSC 80 project focuses on predicting how healthy a recipe is using features such as nutrition ratings and health tags associated with each recipe. We are trying to categorize recipes as 'healthy', 'medium-healthy' or 'unhealthy' based on the variables in the recipes and interactions datasets. We will analyze a variety of methods to define 'healthiness' including looking at recipe tags and nutrition information. Our end goal is to create a useful classifier to assign recipes to each of the health ratings."
+    },
+    {
+        "title": "Omnis nostrum sit minus.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Nisi amet eos neque voluptas sit molestiae nihil iure omnis! Accusantium aliquid nobis cumque animi est accusamus distinctio, consequuntur officiis vero adipisci autem consequatur magni velit delectus unde ullam nesciunt."
+    },
+    {
+        "title": "Explicabo aliquid odio excepturi?",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Velit nihil dolores aliquid! Laborum, dolore commodi? Quos aperiam, soluta aliquam non sint dolorum fugit deserunt veniam. Dolor, obcaecati. Modi ad doloribus ratione dolor temporibus voluptatem exercitationem enim molestiae fugiat!"
+    },
+    {
+        "title": "Ipsam alias officia sed.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Sed, facere reiciendis. Natus debitis eligendi sunt in alias aperiam voluptas numquam adipisci, ipsam, ad vero reprehenderit minima amet possimus quibusdam recusandae fuga illo excepturi. Explicabo porro obcaecati deleniti optio!"
+    },
+    {
+        "title": "Sunt voluptas possimus ratione.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Veniam nobis soluta magnam sequi consequatur modi assumenda, neque eligendi debitis, nam laboriosam eos earum explicabo ea inventore itaque, nisi unde! Distinctio repellendus repudiandae in ex pariatur et vitae illum?"
+    },
+    {
+        "title": "Inventore maxime eius tempore?",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Esse beatae sapiente illo porro tempore inventore voluptates, quibusdam optio error quod blanditiis illum odio quasi voluptatibus iure quo asperiores consequatur. In sed expedita impedit temporibus repellendus ex ratione a?"
+    },
+    {
+        "title": "Officiis vero similique quos.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Soluta tempore saepe vel neque adipisci omnis optio, asperiores molestias alias similique facilis recusandae obcaecati nemo sed officiis minima cupiditate at, veritatis nisi esse pariatur. Aut sequi autem quis dolorum?"
+    },
+    {
+        "title": "Ullam alias odit voluptates.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Repellendus, soluta dolorum tempore vero velit repellat sit eveniet nesciunt doloribus cupiditate error saepe. Veniam impedit quasi, sint qui eos atque quia quod cum, accusantium veritatis saepe id. Hic, obcaecati?"
+    },
+    {
+        "title": "Tenetur cumque culpa nam!",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Quasi provident architecto possimus, tempora voluptatem ipsam quidem quae perspiciatis. Laboriosam eligendi, officia numquam, laborum libero non amet facere incidunt ab fuga consequuntur dolorem. Quia, aspernatur. Et reprehenderit quam perspiciatis."
+    },
+    {
+        "title": "Sit iure quas accusantium.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Dolorum unde ratione commodi nobis quis? Quia, illo nam totam praesentium in autem optio quisquam itaque numquam dicta laborum ipsam dignissimos provident quo! Corrupti enim dolor, voluptatibus quod magni a!"
+    },
+    {
+        "title": "Incidunt sapiente exercitationem reprehenderit.",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Nulla modi voluptas quia eius nostrum esse, dolor doloribus commodi aperiam illum et illo error eos molestias eaque rem dignissimos. Eum, quibusdam commodi. Laboriosam eveniet, qui sunt dolore quia rerum."
+    },
+    {
+        "title": "Vitae, error tempore? Tempore!",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Dignissimos asperiores adipisci nemo quia eligendi cum. Architecto fuga eligendi blanditiis tempore. Modi, repudiandae molestias. Aut, sapiente doloribus et esse iste consequuntur incidunt cupiditate officia sequi! Mollitia quasi at architecto."
+    }
+]

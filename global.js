@@ -18,7 +18,7 @@ const select = document.querySelector('.color-scheme select');
 
 function setColorScheme(scheme) {
     document.documentElement.style.setProperty('color-scheme', scheme);
-    select.value = scheme; // keep dropdown in sync
+    select.value = scheme;
 }
 
 if ('colorScheme' in localStorage) {
@@ -28,21 +28,18 @@ if ('colorScheme' in localStorage) {
 select.addEventListener('input', (event) => {
     const scheme = event.target.value;
     setColorScheme(scheme);
-    localStorage.colorScheme = scheme; // save preference
+    localStorage.colorScheme = scheme;
 });
 
-// $$ helper
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// Base path for local vs GitHub Pages
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/"              
     : "/portfolio/"; 
 
-// Pages for nav
 const pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
@@ -51,31 +48,25 @@ const pages = [
   { url: 'https://github.com/manissen/', title: 'GitHub' },
 ];
 
-// Create nav element
 const nav = document.createElement('nav');
 document.body.prepend(nav);
 
-// Add links dynamically
 for (let p of pages) {
   let url = p.url;
 
-  // Prepend BASE_PATH to relative URLs
   if (!url.startsWith('http') && !url.startsWith('/')) {
     url = BASE_PATH + url;
   }
 
-  // Create link element
   const a = document.createElement('a');
   a.href = url;
   a.textContent = p.title;
 
-  // Highlight current page
   a.classList.toggle(
     'current',
     a.host === location.host && a.pathname === location.pathname
   );
 
-  // Open external links in a new tab
   if (a.host !== location.host) {
     a.target = '_blank';
   }
@@ -85,7 +76,7 @@ for (let p of pages) {
 
 const form = document.querySelector('form');
 form?.addEventListener('submit', (e) => {
-  e.preventDefault(); // prevent default submission
+  e.preventDefault();
 
   const data = new FormData(form);
   const params = new URLSearchParams();
@@ -95,5 +86,48 @@ form?.addEventListener('submit', (e) => {
   }
 
   const url = `${form.action}?${params.toString()}`;
-  location.href = url; // opens mail client with encoded fields
+  location.href = url;
 });
+
+export async function fetchJSON(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  containerElement.innerHTML = '';
+
+  if (!Array.isArray(projects)) {
+    console.error('renderProjects: "projects" must be an array.');
+    return;
+  }
+
+  if (!(containerElement instanceof HTMLElement)) {
+    console.error('renderProjects: invalid container element.');
+    return;
+  }
+
+  const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  if (!validHeadings.includes(headingLevel)) headingLevel = 'h2';
+
+
+  projects.forEach(project => {
+    const article = document.createElement('article');
+    article.innerHTML = `
+      <${headingLevel}>${project.title || 'Untitled'}</${headingLevel}>
+      <h3>Year: ${project.year}</h3>
+      <img src="${project.image || 'placeholder.png'}" alt="${project.title || ''}">
+      <p>${project.description || ''}</p>
+    `;
+    containerElement.appendChild(article);
+  });
+}
+
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}
