@@ -2,7 +2,7 @@ import { fetchJSON, renderProjects, fetchGitHubData } from '../global.js';
 
 async function init() {
   try {
-    const projects = await fetchJSON('./lib/projects.json');
+    const projects = await fetchJSON('../lib/projects.json');
     const container = document.querySelector('.projects');
     renderProjects(projects, container, 'h2');
 
