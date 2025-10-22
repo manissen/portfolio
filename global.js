@@ -120,7 +120,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const article = document.createElement('article');
     article.innerHTML = `
       <${headingLevel}>${project.title || 'Untitled'}</${headingLevel}>
-      <h3>Year: ${project.year}</h3>
+      <p>${project.year}</p>
       <img src="${project.image || 'placeholder.png'}" alt="${project.title || ''}">
       <p>${project.description || ''}</p>
     `;
