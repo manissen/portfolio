@@ -154,6 +154,89 @@ button:hover, select:hover {
     margin: 0;
 }
 
+#projects-plot {
+    max-width: 20em;
+    margin-block: 2em;
+    overflow: visible;
+}
+
+.container {
+    display: flex;           /* horizontal layout */
+    align-items: flex-start; /* align top of pie and legend */
+    gap: 2rem;               /* space between pie and legend */
+    flex-wrap: wrap;         /* legend moves below pie on small screens */
+  }
+  
+  /* Pie chart SVG */
+  .container svg {
+    flex-shrink: 0;          /* don't let pie shrink */
+    width: 200px;            /* optional fixed size */
+    height: 200px;
+  }
+  
+  /* Legend takes all remaining space */
+  .container ul.legend {
+    flex: 1;                 /* fills remaining horizontal space */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  ul.legend {
+    margin-top: 5%;
+    padding: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 0.5rem;
+    list-style: none;
+  }
+  
+/* Each legend item as a flex container */
+ul.legend li.legend-item {
+    display: flex;
+    flex: 1;
+    align-items: center;  /* vertically center swatch and text */
+    gap: 0.5rem;          /* spacing between swatch and label */
+    font-family: sans-serif;
+    font-size: 0.9rem;
+}
+  
+/* Swatch square/circle */
+ul.legend li.legend-item .swatch {
+    width: 16px;
+    height: 16px;
+    aspect-ratio: 1 / 1;      /* keep it square */
+    background-color: var(--color);  /* set via JS inline style */
+    border-radius: 50%;       /* makes it a circle */
+    border: 1px solid #ccc
+}  
+
+svg path {
+    transition: opacity 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  
+  /* Fade other slices when one is hovered */
+  svg:has(path:hover) path:not(:hover) {
+    opacity: 0.5;
+  }
+  
+  /* Optional: slightly enlarge hovered slice for effect */
+  svg path:hover {
+    transform: scale(1.03);
+  }
+  
+  /* Legend items hover */
+  ul.legend li.legend-item:hover {
+    font-weight: bold;
+  }
+  
+  
+
 section {
     background-color: color-mix(in oklch, var(--bg-section), canvas 90%);
     padding: 1.5em;
