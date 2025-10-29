@@ -1,18 +1,12 @@
-import { fetchJSON, renderProjects, fetchGitHubData } from '../global.js';
+// projects/projects.js
+import { fetchJSON, renderProjects } from '../global.js';
 
-async function init() {
-  try {
-    const projects = await fetchJSON('../lib/projects.json');
-    const container = document.querySelector('.projects');
-    renderProjects(projects, container, 'h2');
+const projects = await fetchJSON('../lib/projects.json');
+const projectsContainer = document.querySelector('.projects');
+renderProjects(projects, projectsContainer, 'h2');
 
-    const title = document.querySelector('.projects-title');
-    if (title && Array.isArray(projects)) {
-      title.textContent = `${projects.length} Projects`;
-    }
-  } catch (error) {
-    console.error('Error loading projects:', error);
-  }
+// Count projects
+const titleEl = document.querySelector('.projects-title');
+if (titleEl) {
+  titleEl.textContent = `Projects (${projects.length})`;
 }
-
-init();
