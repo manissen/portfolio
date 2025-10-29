@@ -8,17 +8,17 @@ const projectsContainer = document.querySelector('.projects');
 renderProjects(latestProjects, projectsContainer, 'h3');
 
 // --- GitHub Profile Data ---
-const githubData = await fetchGitHubData('your-github-username');
+const githubData = await fetchGitHubData('manissen');
 const profileStats = document.querySelector('#profile-stats');
 
 if (profileStats) {
   profileStats.innerHTML = `
     <h2>GitHub Profile Stats</h2>
     <dl>
-      <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
-      <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
-      <dt>Followers:</dt><dd>${githubData.followers}</dd>
-      <dt>Following:</dt><dd>${githubData.following}</dd>
+      <dt>PUBLIC REPOS</dt><dd>${githubData.public_repos}</dd>
+      <dt>PUBLIC GISTS</dt><dd>${githubData.public_gists}</dd>
+      <dt>FOLLOWERS</dt><dd>${githubData.followers}</dd>
+      <dt>FOLLOWING</dt><dd>${githubData.following}</dd>
     </dl>
   `;
 }
