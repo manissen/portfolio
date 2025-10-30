@@ -105,20 +105,20 @@ function updateSelection(data, pieData) {
 // ------------------------
 // Search input
 // ------------------------
+
 const searchInput = document.querySelector('.searchBar');
 searchInput.addEventListener('input', (event) => {
-  query = event.target.value;
+  query = event.target.value.toLowerCase();
 
-  // Filter projects by search query
+  // Filter based on query and selected year
   let filteredProjects = projects.filter(p =>
-    Object.values(p).join('\n').toLowerCase().includes(query.toLowerCase())
+    Object.values(p).join('\n').toLowerCase().includes(query)
   );
 
-  // If a wedge is selected, further filter by year
   if (selectedIndex !== -1) {
-    filteredProjects = filteredProjects.filter(p =>
-      p.year === d3.select('.legend li.selected').datum()?.label
-    );
+    // Only include projects from selected year
+    const year = d3.select('.legend li.selected').text().split(' ')[0];
+    filteredProjects = filteredProjects.filter(p => p.year === year);
   }
 
   renderProjects(filteredProjects, projectsContainer, 'h2');
