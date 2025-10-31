@@ -14,118 +14,108 @@ if (titleEl) {
   titleEl.textContent = `Projects (${projects.length})`;
 }
 
+// --- GLOBAL STATE ---
 let query = '';
 let selectedIndex = -1;
 
-// Create color scale
-const colors = d3.scaleOrdinal(d3.schemeTableau10);
+// === Initial render ===
+renderProjects(projects, projectsContainer, 'h2');
+renderPieChart(projects);
 
-// ------------------------
-// Render pie chart & legend
-// ------------------------
-function renderPieChart(projectsGiven) {
-  const svg = d3.select('svg');
-  const legend = d3.select('.legend');
-
-  // Clear previous paths & legend items
-  svg.selectAll('path').remove();
-  legend.selectAll('li').remove();
-
-  // Roll up projects by year
-  const rolledData = d3.rollups(
-    projectsGiven,
-    v => v.length,
-    d => d.year
-  );
-
-  // Convert to { label, value } objects
-  const data = rolledData.map(([year, count]) => ({ label: year, value: count }));
-
-  // Arc and pie generators
-  const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-  const pieGenerator = d3.pie().value(d => d.value);
-  const pieData = pieGenerator(data);
-
-  // Draw pie slices
-  pieData.forEach((d, i) => {
-    svg.append('path')
-      .attr('d', arcGenerator(d))
-      .attr('fill', selectedIndex === i ? 'oklch(60% 45% 0)' : colors(i))
-      .style('cursor', 'pointer')
-      .on('click', () => {
-        selectedIndex = selectedIndex === i ? -1 : i;
-        updateSelection(data, pieData);
-      });
-  });
-
-  // Build legend
-  data.forEach((d, i) => {
-    legend.append('li')
-      .datum(d) // bind data to legend
-      .attr('class', 'legend-item')
-      .attr('style', `--color: ${colors(i)}`)
-      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
-      .style('cursor', 'pointer')
-      .on('click', () => {
-        selectedIndex = selectedIndex === i ? -1 : i;
-        updateSelection(data, pieData);
-      });
-  });
-}
-
-// ------------------------
-// Update pie selection & filtered projects
-// ------------------------
-function updateSelection(data, pieData) {
-  const svg = d3.select('svg');
-  const legend = d3.select('.legend');
-
-  // Update pie slice colors
-  svg.selectAll('path')
-    .attr('fill', (_, i) => selectedIndex === i ? 'oklch(60% 45% 0)' : colors(i));
-
-  // Update legend highlight
-  legend.selectAll('li')
-    .classed('selected', (_, i) => selectedIndex === i);
-
-  // Filter projects based on selected wedge
-  let filteredProjects = selectedIndex === -1 ? projects : projects.filter(p => p.year === data[selectedIndex].label);
-
-  // Apply search filter
-  if (query) {
-    filteredProjects = filteredProjects.filter(p =>
-      Object.values(p).join('\n').toLowerCase().includes(query.toLowerCase())
-    );
-  }
-
-  // Render filtered projects
-  renderProjects(filteredProjects, projectsContainer, 'h2');
-}
-
-// ------------------------
-// Search input
-// ------------------------
-
+// === SEARCH BAR ===
 const searchInput = document.querySelector('.searchBar');
 searchInput.addEventListener('input', (event) => {
-  query = event.target.value.toLowerCase();
-
-  // Filter based on query and selected year
-  let filteredProjects = projects.filter(p =>
-    Object.values(p).join('\n').toLowerCase().includes(query)
-  );
-
-  if (selectedIndex !== -1) {
-    // Only include projects from selected year
-    const year = d3.select('.legend li.selected').text().split(' ')[0];
-    filteredProjects = filteredProjects.filter(p => p.year === year);
-  }
-
-  renderProjects(filteredProjects, projectsContainer, 'h2');
-  renderPieChart(filteredProjects);
+  query = event.target.value;
+  const filtered = getFilteredProjects();
+  renderProjects(filtered, projectsContainer, 'h2');
+  renderPieChart(filtered);
 });
 
-// ------------------------
-// Initial pie chart render
-// ------------------------
-renderPieChart(projects);
+// === Helper: Combined filtering (search only) ===
+function getFilteredProjects() {
+  return projects.filter((p) => {
+    const matchesQuery = Object.values(p)
+      .join('\n')
+      .toLowerCase()
+      .includes(query.toLowerCase());
+    return matchesQuery;
+  });
+}
+
+// === PIE CHART RENDERING ===
+function renderPieChart(projectsGiven) {
+  const svg = d3.select('svg');
+  svg.selectAll('*').remove(); // clear previous chart
+
+  // aggregate projects by year
+  const rolledData = d3.rollups(projectsGiven, (v) => v.length, (d) => d.year);
+  const data = rolledData.map(([year, count]) => ({ year, count }));
+
+  const width = 400;
+  const radius = width / 2;
+  const color = d3.scaleOrdinal(d3.schemeTableau10);
+  const pie = d3.pie().value((d) => d.count);
+  const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+  const arcs = pie(data);
+
+  svg.attr('viewBox', [-radius, -radius, width, width]);
+
+  // === WEDGES ===
+  svg
+    .selectAll('path')
+    .data(arcs)
+    .join('path')
+    .attr('d', arc)
+    .attr('fill', (_, i) => color(i))
+    .attr('stroke', 'white')
+    .attr('class', (d) => (d.index === selectedIndex ? 'selected' : ''))
+    .on('click', (event, d) => {
+      selectedIndex = selectedIndex === d.index ? -1 : d.index;
+      updateSelection(svg, data);
+    });
+
+  // === LEGEND ===
+  const legend = d3.select('.legend');
+  legend.selectAll('*').remove();
+  legend
+    .selectAll('li')
+    .data(data)
+    .join('li')
+    .text((d) => `${d.year} (${d.count})`)
+    .attr('class', (_, i) => (i === selectedIndex ? 'selected' : ''))
+    .on('click', (event, d) => {
+      const index = data.findIndex((x) => x.year === d.year);
+      selectedIndex = selectedIndex === index ? -1 : index;
+      updateSelection(svg, data);
+    });
+}
+
+// === HANDLE SELECTION + FILTERING ===
+function updateSelection(svg, data) {
+  // highlight selected wedge and legend
+  svg
+    .selectAll('path')
+    .attr('class', (d) => (d.index === selectedIndex ? 'selected' : ''));
+
+  d3.select('.legend')
+    .selectAll('li')
+    .attr('class', (_, i) => (i === selectedIndex ? 'selected' : ''));
+
+  // determine filtered set
+  const baseFiltered = getFilteredProjects();
+
+  if (selectedIndex === -1) {
+    // nothing selected, show all (respecting current search query)
+    renderProjects(baseFiltered, projectsContainer, 'h2');
+    return;
+  }
+
+  // find selected year from current pie data
+  const selectedYear = data[selectedIndex].year;
+  const filteredByYear = baseFiltered.filter((p) => p.year === selectedYear);
+
+  renderProjects(filteredByYear, projectsContainer, 'h2');
+}
+
+// === END ===

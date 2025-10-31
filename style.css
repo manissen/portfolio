@@ -215,26 +215,30 @@ ul.legend li.legend-item .swatch {
     border: 1px solid #ccc
 }  
 
-svg path {
-    transition: opacity 0.3s, transform 0.3s;
-    cursor: pointer;
-  }
-  
-  /* Fade other slices when one is hovered */
-  svg:has(path:hover) path:not(:hover) {
-    opacity: 0.5;
-  }
-  
-  /* Optional: slightly enlarge hovered slice for effect */
-  svg path:hover {
-    transform: scale(1.03);
-  }
-  
-  /* Legend items hover */
-  ul.legend li.legend-item:hover {
-    font-weight: bold;
-  }
-  
+/* Hover fade effect */
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+/* Selected wedge + legend item */
+.selected {
+  --color: oklch(60% 45% 0) !important;
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
+
+.selected:is(li) {
+  color: var(--color);
+  font-weight: 600;
+}
+
   
 
 section {
