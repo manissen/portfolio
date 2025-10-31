@@ -118,11 +118,17 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
   projects.forEach((project) => {
     const article = document.createElement('article');
+
+    let shortDescription = project.description;
+    if (shortDescription.length > 500) {
+      shortDescription = shortDescription.slice(0, 500) + '...';
+    }
+
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
       <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
+      <p>${shortDescription}</p>
     `;
     containerElement.appendChild(article);
   });
