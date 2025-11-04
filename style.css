@@ -374,3 +374,101 @@ section a {
     color: var(--color-accent);
   }
 }
+
+/* gidlines */
+.gridlines line {
+  stroke: #ccc;      
+  stroke-opacity: 0.5; 
+  shape-rendering: crispEdges; 
+}
+
+.gridlines path {
+  stroke: none;     
+}
+
+dl.info{
+  display: grid;
+  grid-template-columns: (1fr, 1fr);
+}
+
+.tooltip{
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  margin: 0;                
+  padding: 0;
+}
+
+dl.info dt,
+dl.info dd {
+  margin: 0;                     
+}
+
+dl.info dt {
+  font-weight: 500;
+  color: #666;                    
+  text-align: right;              
+}
+
+dl.info dd {
+  font-weight: 600;
+  color: #222;                    
+}
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+/* Base tooltip styling */
+#commit-tooltip.tooltip {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  transition: opacity 0.2s ease;
+  font-size: 0.9rem;
+  
+
+  /* ✨ Visual style */
+  background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* subtle elevation */
+  border-radius: 0.5rem;                      /* rounded corners */
+  backdrop-filter: blur(8px);                 /* frosted glass effect */
+  padding: 0.75rem 1rem;
+}
+
+/* Make dt/dd use your previous grid layout */
+#commit-tooltip dl,
+#commit-tooltip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+#commit-tooltip dt {
+  font-weight: 500;
+  color: #666;
+  text-align: right;
+}
+
+#commit-tooltip dd {
+  font-weight: 600;
+  color: #222;
+}
+
+/* Optional: subtle fade/scale effect on show */
+#commit-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}

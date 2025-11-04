@@ -109,11 +109,107 @@ function renderCommitInfo(data, commits) {
       dl.append('dt').text('Days worked on site');
       dl.append('dd').text(daysWorked);
 }
-  
 
-// Step 1.4 – Run once DOM is ready
+function renderScatterPlot(data, commits) {
+    const width = 1000;
+    const height = 600;
+    const margin = { top: 10, right: 10, bottom: 30, left: 40 };
+    const usableWidth = width - margin.left - margin.right;
+    const usableHeight = height - margin.top - margin.bottom;
+  
+    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const rScale = d3.scaleSqrt()
+      .domain([minLines, maxLines])
+      .range([2, 30]);
+  
+    // Create SVG
+    const svg = d3.select('#chart')
+      .append('svg')
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .style('overflow', 'visible');
+  
+    //create a group for dots
+    const dots = svg.append('g').attr('class', 'dots');
+  
+    // Scales
+    const xScale = d3.scaleTime()
+      .domain(d3.extent(commits, d => d.datetime))
+      .range([margin.left, margin.left + usableWidth])
+      .nice();
+  
+    const yScale = d3.scaleLinear()
+      .domain([0, 24])
+      .range([margin.top + usableHeight, margin.top]);
+  
+    // Axes
+    svg.append('g')
+      .attr('transform', `translate(0, ${margin.top + usableHeight})`)
+      .call(d3.axisBottom(xScale));
+  
+    svg.append('g')
+      .attr('transform', `translate(${margin.left}, 0)`)
+      .call(d3.axisLeft(yScale).tickFormat(d => `${String(d).padStart(2, '0')}:00`));
+  
+    // Gridlines
+    svg.append('g')
+      .attr('class', 'gridlines')
+      .attr('transform', `translate(${margin.left}, 0)`)
+      .call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableWidth));
+  
+    dots.selectAll('circle')
+      .data(commits)
+      .join('circle')
+      .attr('cx', d => xScale(d.datetime))
+      .attr('cy', d => yScale(d.hourFrac))
+      .attr('r', d => rScale(d.totalLines))
+      .attr('fill', 'steelblue')
+      .style('fill-opacity', 0.7)
+      .on('mouseenter', (event, commit) => {
+        d3.select(event.currentTarget).style('fill-opacity', 1);
+        renderTooltipContent(commit);
+        updateTooltipVisibility(true);
+        updateTooltipPosition(event);
+      })
+      .on('mousemove', updateTooltipPosition)
+      .on('mouseleave', (event) => {
+        d3.select(event.currentTarget).style('fill-opacity', 0.7);
+        updateTooltipVisibility(false);
+      });
+}  
+  
+function updateTooltipVisibility(isVisible) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.hidden = !isVisible;
+}
+
+function updateTooltipPosition(event) {
+    const tooltip = document.getElementById('commit-tooltip');
+    const offsetX = 15; 
+    const offsetY = 100;
+    tooltip.style.left = `${event.clientX + offsetX}px`;
+    tooltip.style.top = `${event.clientY + offsetY}px`;
+}
+
+function renderTooltipContent(commit) {
+    const tooltip = d3.select('#commit-tooltip');
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+    tooltip.style('opacity', 1);
+  
+    if (Object.keys(commit).length === 0) return;
+  
+    link.href = commit.url;
+    link.textContent = commit.id;
+    date.textContent = commit.datetime?.toLocaleString('en', {
+      dateStyle: 'full',
+    });
+}
+
+// Run once DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
-  const data = await loadData();
-  const commits = processCommits(data);
-  renderCommitInfo(data, commits);
-});
+    const data = await loadData();
+    const commits = processCommits(data);
+    renderCommitInfo(data, commits);
+    renderScatterPlot(data, commits);
+    renderTooltipContent(commits);
+  });
