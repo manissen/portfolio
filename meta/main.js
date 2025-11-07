@@ -1,6 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-// Step 1.1 – Read CSV
+// Read CSV
 async function loadData() {
   const data = await d3.csv('loc.csv', (row) => ({
     ...row,
@@ -13,7 +13,7 @@ async function loadData() {
   return data;
 }
 
-// Step 1.2 – Process commits
+// Process commits
 function processCommits(data) {
   return d3
     .groups(data, (d) => d.commit)
@@ -42,22 +42,7 @@ function processCommits(data) {
 
       return ret;
     });
-}
-
-// Helper: map hours to rough times of day
-function getTimeOfDay(hour) {
-    if (hour < 6) return "night";
-    if (hour < 12) return "morning";
-    if (hour < 18) return "afternoon";
-    return "evening";
-}
-  
-  // Helper: get most frequent value in an array
-function mostCommon(arr) {
-    return d3.rollups(arr, v => v.length, d => d)
-             .sort((a, b) => d3.descending(a[1], b[1]))[0][0];
-}
-  
+} 
 
 function renderCommitInfo(data, commits) {
     const statsContainer = d3.select('#stats');
@@ -132,12 +117,12 @@ function renderScatterPlot(data, commits) {
     const dots = svg.append('g').attr('class', 'dots');
   
     // Scales
-    const xScale = d3.scaleTime()
+    xScale = d3.scaleTime()
       .domain(d3.extent(commits, d => d.datetime))
       .range([margin.left, margin.left + usableWidth])
       .nice();
-  
-    const yScale = d3.scaleLinear()
+
+    yScale = d3.scaleLinear()
       .domain([0, 24])
       .range([margin.top + usableHeight, margin.top]);
   
@@ -167,27 +152,32 @@ function renderScatterPlot(data, commits) {
       .on('mouseenter', (event, commit) => {
         d3.select(event.currentTarget).style('fill-opacity', 1);
         renderTooltipContent(commit);
-        updateTooltipVisibility(true);
+        updateTooltipVisibility(true, event);
         updateTooltipPosition(event);
       })
       .on('mousemove', updateTooltipPosition)
       .on('mouseleave', (event) => {
         d3.select(event.currentTarget).style('fill-opacity', 0.7);
-        updateTooltipVisibility(false);
+        updateTooltipVisibility(false, event);
       });
+
+      createBrushSelector(svg);
 }  
   
-function updateTooltipVisibility(isVisible) {
+function updateTooltipVisibility(isVisible, event) {
     const tooltip = document.getElementById('commit-tooltip');
     tooltip.hidden = !isVisible;
 }
 
 function updateTooltipPosition(event) {
-    const tooltip = document.getElementById('commit-tooltip');
-    const offsetX = 15; 
-    const offsetY = 100;
-    tooltip.style.left = `${event.clientX + offsetX}px`;
-    tooltip.style.top = `${event.clientY + offsetY}px`;
+  const tooltip = document.getElementById('commit-tooltip');
+
+  // Offset so the tooltip sits a bit away from the cursor/dot
+  const offsetX = 15;
+  const offsetY = -30;
+
+  tooltip.style.left = `${event.pageX + offsetX}px`;
+  tooltip.style.top = `${event.pageY + offsetY}px`;
 }
 
 function renderTooltipContent(commit) {
@@ -205,44 +195,33 @@ function renderTooltipContent(commit) {
     });
 }
 
-function createBrushSelector(svg, xScale, yScale, commits) {
-  svg.call(
-    d3.brush()
-      .on('start brush end', (event) => brushed(event, xScale, yScale, commits))
-  );
-
-  // Raise dots and everything after overlay
+function createBrushSelector(svg) {
+  svg.call(d3.brush().on('start brush end', brushed));
   svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
-function brushed(event, xScale, yScale, commits) {
+function brushed(event) {
   const selection = event.selection;
-
-  // Update circle styles
   d3.selectAll('circle').classed('selected', (d) =>
-    isCommitSelected(selection, d, xScale, yScale)
+    isCommitSelected(selection, d),
   );
-
-  // Update count paragraph
-  renderSelectionCount(selection, xScale, yScale, commits);
+  renderSelectionCount(selection);
   renderLanguageBreakdown(selection);
 }
 
-function isCommitSelected(selection, commit, xScale, yScale) {
+function isCommitSelected(selection, commit) {
   if (!selection) return false;
 
-  const [[x0, y0], [x1, y1]] = selection;
+  const [[x0, y0], [x1, y1]] = selection; // brush selection corners
+  const x = xScale(commit.datetime);
+  const y = yScale(commit.hourFrac);
 
-  // Map commit data to SVG coordinates
-  const cx = xScale(commit.datetime);
-  const cy = yScale(commit.hourFrac);
-
-  return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+  return x >= x0 && x <= x1 && y >= y0 && y <= y1;
 }
 
-function renderSelectionCount(selection, xScale, yScale, commits) {
+function renderSelectionCount(selection) {
   const selectedCommits = selection
-    ? commits.filter((d) => isCommitSelected(selection, d, xScale, yScale))
+    ? commits.filter((d) => isCommitSelected(selection, d))
     : [];
 
   const countElement = document.querySelector('#selection-count');
@@ -287,12 +266,9 @@ function renderLanguageBreakdown(selection) {
   }
 }
 
-// Run once DOM is ready
-document.addEventListener('DOMContentLoaded', async () => {
-    const data = await loadData();
-    const commits = processCommits(data);
-    renderCommitInfo(data, commits);
-    renderScatterPlot(data, commits);
-    renderTooltipContent(commits);
-    createBrushSelector(svg, xScale, yScale, commits);
-  });
+const data = await loadData();
+let commits = processCommits(data);
+let xScale, yScale;
+renderCommitInfo(data, commits);
+renderScatterPlot(data, commits);
+renderTooltipContent(commits);

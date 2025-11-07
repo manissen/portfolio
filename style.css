@@ -487,6 +487,70 @@ circle:hover {
   animation: marching-ants 2s linear infinite;
 }
 
-circle.selected {
+circle.selected{
   fill: #ff6b6b;
+}
+
+/* === LANGUAGE BREAKDOWN SECTION === */
+#language-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* two equal columns for stats */
+  grid-template-rows: auto;        /* first row fits title automatically */
+  gap: 1.25rem 2rem;
+}
+
+/* Make the <dl> span full width across both columns */
+div.language{
+  max-width: 80ch;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background-color: color-mix(in oklch, canvas, var(--color-accent) 5%);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px color-mix(in oklch, var(--border-color), canvas 30%);
+  font-family: system-ui, sans-serif;
+  line-height: 1.4;
+  transition: background-color 0.3s ease;
+}
+
+h2.language-header{
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Label (dt) */
+#language-breakdown dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: color-mix(in oklch, var(--text-color), black 20%);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+/* Value (dd) */
+#language-breakdown dd {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-accent);
+  text-align: center;
+  margin: 0;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+/* Hover effect for fun */
+#language-breakdown dd:hover {
+  color: color-mix(in oklch, var(--color-accent), canvas 25%);
+  transform: scale(1.05);
+}
+
+/* Selection count text */
+#selection-count {
+  grid-column: 1 / -1; /* span both columns */
+  text-align: center;
+  font-weight: 500;
+  margin-top: 2rem;
+  color: var(--text-color);
 }
