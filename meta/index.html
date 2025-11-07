@@ -9,27 +9,28 @@
     <script src="main.js" type="module"></script>
 </head>
 <body>
-    <h1>Meta</h1>
-    <div id="stats"></div>
-    <h2>Commits by time of day</h2>
-    <div id="chart"></div>
-    <dl id="commit-tooltip" class="info tooltip">
+    <h1>Codebase Meta Analysis</h1>
+      <p>This page displays stats and visualizations generated from our codebase.</p>
+
+      <div id="stats"></div>
+
+      <h2>Commits by Time of Day</h2>
+      <div id="chart"></div>
+
+      <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
-        <dd>
-          <a href="" id="commit-link" target="_blank"></a>
-        </dd>
-      
+        <dd><a href="" id="commit-link" target="_blank"></a></dd>
+
         <dt>Date</dt>
         <dd id="commit-date"></dd>
-      
-        <dt>Time</dt>
-        <dd id="commit-time"></dd>
 
         <dt>Author</dt>
         <dd id="commit-author"></dd>
 
-        <dt>Lines edited</dt>
+        <dt>Lines Edited</dt>
         <dd id="commit-lines"></dd>
-    </dl>
+      </dl>
+    <dl id="language-breakdown" class="stats"></dl>
+    <p id="selection-count">No commits selected</p>
 </body>
 </html>
