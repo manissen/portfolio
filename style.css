@@ -34,6 +34,37 @@ h1 {
     font-size: 400%;
 }
 
+.project-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.5rem;
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project-link:hover {
+  background: color-mix(in oklch, var(--color-accent), canvas 20%);
+  transform: translateY(-2px);
+}
+
+.project-link:active {
+  transform: translateY(0);
+}
+
+article img {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article a:hover img {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
 .photo-gallery {
     display: flex;
     justify-content: center; 
@@ -553,4 +584,114 @@ h2.language-header{
   font-weight: 500;
   margin-top: 2rem;
   color: var(--text-color);
+}
+
+/* USP 4 Carousel */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery figure {
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.gallery figure:hover {
+  transform: scale(1.03);
+}
+
+.gallery img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery figcaption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+/* === Lightbox Overlay === */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.lightbox:target {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
+
+/* === Lightbox Caption === */
+.lightbox .caption {
+  max-width: 80%;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.4;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+/* === Close Button === */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 0.25rem 0.6rem;
+  line-height: 1;
+  transition: background 0.3s;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 600px) {
+  .gallery img {
+    height: 200px;
+  }
+  .lightbox .caption {
+    font-size: 0.9rem;
+  }
 }
