@@ -1,5 +1,12 @@
 [
     {
+        "title": "Boston Bike Traffic",
+        "year": "2025",
+        "image": "../images/dsc_lab7_pic.png",
+        "url": "https://manissen.github.io/bike-traffic/",
+        "description": "Used geoJSON bike traffic data to create an interactive map visualization of bike traffic in the Boston area during different times of the day"
+    },
+    {
         "title": "Predicting Recipe Health",
         "year": "2025",
         "image": "../images/DSC80_Recipe_Plot.png",
@@ -74,12 +81,5 @@
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "url": "",
         "description": "Dignissimos asperiores adipisci nemo quia eligendi cum. Architecto fuga eligendi blanditiis tempore. Modi, repudiandae molestias. Aut, sapiente doloribus et esse iste consequuntur incidunt cupiditate officia sequi! Mollitia quasi at architecto."
-    },
-    {
-        "title": "faldfjalfj",
-        "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "url": "",
-        "description": "Veniam nobis soluta magnam sequi consequatur modi assumenda, neque eligendi debitis, nam laboriosam eos earum explicabo ea inventore itaque, nisi unde! Distinctio repellendus repudiandae in ex pariatur et vitae illum?"
     }
 ]
