@@ -104,7 +104,7 @@ export async function fetchJSON(url) {
   }
 }
 
-export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+export function renderProjects(projects, containerElement, headingLevel = 'h2', base = document.baseURI) {
   if (!containerElement) {
     console.error('Invalid container element.');
     return;
@@ -120,34 +120,33 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   projects.forEach((project) => {
     const article = document.createElement('article');
 
+    // Resolve relative paths relative to JSON’s folder
+    const imageURL = new URL(project.image, base).href;
+
     const shortDescription = project.description.length > 300
       ? project.description.slice(0, 300) + "..."
       : project.description;
 
-    let imagePath = project.image;
-
-    // If running on a subpage like /projects/, correct the relative path
-    if (location.pathname.includes('/projects/')) {
-      imagePath = '../' + project.image;
-    }
-
     const projectLink = project.url
-      ? `<a class="project-link" href="${project.url}" rel="noopener">View Project →</a>`
+      ? `<a class="project-link" href="${project.url}" rel="noopener" target="_blank">View Project →</a>`
       : "";
 
-      article.innerHTML = `
+    article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
-      <img src="${imagePath}" alt="${project.title}">
-      </a>
+      <img src="${imageURL}" alt="${project.title}">
       <p>${shortDescription}</p>
       ${projectLink}
     `;
+
     containerElement.appendChild(article);
   });
 }
 
+
 // GitHub API fetch function
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
+  const projects = await fetchJSON('./lib/projects.json');
+  const jsonBase = new URL('./lib/', import.meta.url);
 }
