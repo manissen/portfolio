@@ -104,7 +104,7 @@ export async function fetchJSON(url) {
   }
 }
 
-export function renderProjects(projects, containerElement, headingLevel = 'h2', base = document.baseURI) {
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {
     console.error('Invalid container element.');
     return;
@@ -138,15 +138,11 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2', 
       <p>${shortDescription}</p>
       ${projectLink}
     `;
-
     containerElement.appendChild(article);
   });
 }
 
-
 // GitHub API fetch function
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);
-  const projects = await fetchJSON('./lib/projects.json');
-  const jsonBase = new URL('./lib/', import.meta.url);
 }
