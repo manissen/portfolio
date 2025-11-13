@@ -124,6 +124,13 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       ? project.description.slice(0, 300) + "..."
       : project.description;
 
+    let imagePath = project.image;
+
+    // If running on a subpage like /projects/, correct the relative path
+    if (location.pathname.includes('/projects/')) {
+      imagePath = '../' + project.image;
+    }
+
     const projectLink = project.url
       ? `<a class="project-link" href="${project.url}" rel="noopener">View Project →</a>`
       : "";
@@ -131,7 +138,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
-      <img src="${project.image}" alt="${project.title}">
+      <img src="${imagePath}" alt="${project.title}">
       </a>
       <p>${shortDescription}</p>
       ${projectLink}
