@@ -120,29 +120,31 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   projects.forEach((project) => {
     const article = document.createElement('article');
 
-    const shortDescription = project.description.length > 300
-      ? project.description.slice(0, 300) + "..."
-      : project.description;
+    const shortDescription =
+      project.description.length > 300
+        ? project.description.slice(0, 300) + "..."
+        : project.description;
 
     const projectLink = project.url
       ? `<a class="project-link" href="${project.url}" rel="noopener" target="_blank">View Project →</a>`
       : "";
 
-    const img = document.createElement('image');
-    if (project.image){
-      img.src = project.image.startsWith('http')
+    // ✅ Fix: use correct element and URL resolution
+    let imgSrc = '';
+    if (project.image) {
+      imgSrc = project.image.startsWith('http')
         ? project.image
-        : `${BASE_PATH}${project.image}`;
-      img.alt = project.title || 'Project image';
+        : `${BASE_PATH}${project.image.replace(/^\.\//, '').replace(/^\.{2}\//, '')}`;
     }
 
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
-      <img src="${img}" alt="${project.title}">
+      ${imgSrc ? `<img src="${imgSrc}" alt="${project.title}">` : ''}
       <p>${shortDescription}</p>
       ${projectLink}
     `;
+
     containerElement.appendChild(article);
   });
 }
