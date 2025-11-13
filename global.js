@@ -120,9 +120,6 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   projects.forEach((project) => {
     const article = document.createElement('article');
 
-    // Resolve relative paths relative to JSON’s folder
-    const imageURL = new URL(project.image, base).href;
-
     const shortDescription = project.description.length > 300
       ? project.description.slice(0, 300) + "..."
       : project.description;
@@ -131,10 +128,18 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       ? `<a class="project-link" href="${project.url}" rel="noopener" target="_blank">View Project →</a>`
       : "";
 
+    const img = document.createElement('image');
+    if (project.image){
+      img.src = project.image.startsWith('http')
+        ? project.image
+        : `${BASE_PATH}${project.image}`;
+      img.alt = project.title || 'Project image';
+    }
+
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
-      <img src="${imageURL}" alt="${project.title}">
+      <img src="${img}" alt="${project.title}">
       <p>${shortDescription}</p>
       ${projectLink}
     `;

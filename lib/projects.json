@@ -2,35 +2,35 @@
     {
         "title": "Boston Bike Traffic",
         "year": "2025",
-        "image": "../images/dsc_lab7_pic.png",
+        "image": "/images/dsc_lab7_pic.png",
         "url": "https://manissen.github.io/bike-traffic/",
         "description": "Used geoJSON bike traffic data to create an interactive map visualization of bike traffic in the Boston area during different times of the day"
     },
     {
         "title": "Predicting Recipe Health",
         "year": "2025",
-        "image": "../images/DSC80_Recipe_Plot.png",
+        "image": "/images/DSC80_Recipe_Plot.png",
         "url": "https://manissen.github.io/predicting-recipe-health/",
         "description": "This DSC 80 project focuses on predicting how healthy a recipe is using features such as nutrition ratings and health tags associated with each recipe. We are trying to categorize recipes as 'healthy', 'medium-healthy' or 'unhealthy' based on the variables in the recipes and interactions datasets. We will analyze a variety of methods to define 'healthiness' including looking at recipe tags and nutrition information. Our end goal is to create a useful classifier to assign recipes to each of the health ratings."
     },
     {
         "title": "Is Abortion A Partisan Issue?",
         "year": "2025",
-        "image": "../images/DSC106_Project2.png",
+        "image": "/images/DSC106_Project2.png",
         "url": "https://m1chun.github.io/dsc106-project2/",
         "description": "Created two visualizations to try to convince the viewer of two opposing opinions."
     },
     {
         "title": "Exploring Summer 2024 Wildfires Across The United States",
         "year": "2025",
-        "image": "../images/dsc106-project3-viz.png",
+        "image": "/images/dsc106-project3-viz.png",
         "url": "https://m1chun.github.io/dsc106-project3/",
         "description": "Esse beatae sapiente illo porro tempore inventore voluptates, quibusdam optio error quod blanditiis illum odio quasi voluptatibus iure quo asperiores consequatur. In sed expedita impedit temporibus repellendus ex ratione a?"
     },
     {
         "title": "'So Delicious' and Somewhat Nutritious",
         "year": "2025",
-        "image": "../images/DSC106_Project1.png",
+        "image": "/images/DSC106_Project1.png",
         "url": "",
         "description": "I chose to do a parallel coordinate plot to compare the different health factors between the top five ice cream brands. I struggled with this plot as there were over 200 lines in one plot and it was hard to see any trends across brands. Instead, I found the mean of each brand and used a singular line to represent each brand. I also chose to find the mean of all the brands to have more data points to compare the top brands to. This visual encoding is appropriate for my data because it is easy to compare various variables to a small number of brands. If I used a bar chart, there would be multiple lines per variable and get clunky quickly. With parallel coordinates, it is easy to spot outliers. I normalized each health factor with the z-score to standardize the distributions of each health factor. This centered the variable around its mean and scaled by the variability. Doing this ensures that the health factors with large ranges don’t dominate the health factors with small ranges. As a result, the factors contribute equally and the differences across brands are more meaningful. As for colors, I wanted “So Delicious” to stand out because it is the brand I am choosing to focus on given its significant difference from the other brands in the Fiber and Protein categories. For this reason, I had to give it a very bold color such as red. I also made the line thicker than the others so it would stand out more. The other lines are a visual to see how the different brands compare to “So Delicious” so I gave it cooler colors and lowered the opacity. Whole Foods got green because of their logo and Blue Bunny got blue because of their brand name. This chart ensures readability and draws the viewer's eyes towards the large outliers. By choosing to focus on the brand “So Delicious”, it makes it easier to show how it compares against other brands. The standardized scaling also makes the differences across nutrients more interpretable, allowing viewers to quickly see which brands deviate most from the average. Overall, these changes allow for effective communication that is both interpretable and visually accessible."
     },
@@ -44,7 +44,7 @@
     {
         "title": "USP 4 Projects",
         "year": "2024",
-        "image": "../images/USP4-4.jpg",
+        "image": "/images/USP4-4.jpg",
         "url": "https://manissen.github.io/portfolio/sites/usp4-projects.html",
         "description": "Dolorum unde ratione commodi nobis quis? Quia, illo nam totam praesentium in autem optio quisquam itaque numquam dicta laborum ipsam dignissimos provident quo! Corrupti enim dolor, voluptatibus quod magni a!"
     },
