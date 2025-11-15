@@ -126,7 +126,7 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
         : project.description;
 
     const projectLink = project.url
-      ? `<a class="project-link" href="${project.url}" rel="noopener" target="_blank">View Project →</a>`
+      ? `<a class="project-link" href="${project.url}" rel="noopener">View Project →</a>`
       : "";
 
     // ✅ Fix: use correct element and URL resolution
