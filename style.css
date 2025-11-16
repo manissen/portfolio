@@ -696,13 +696,23 @@ h2.language-header{
   }
 }
 
-.meta-time{
+.meta-time {
   display: flex;
-  flex: 1;
-  align-items: baseline;
-
+  flex-direction: column; /* stack children vertically */
+  width: 100%;
 }
 
-time #commit-time{
-  margin-left: auto;
+.meta-time label {
+  display: flex;
+  flex-direction: column; /* stack slider and time vertically */
+  width: 100%;
+}
+
+#commit-progress {
+  width: 100%; /* slider spans full width */
+}
+
+#commit-time {
+  align-self: flex-end; /* move time to the right under slider */
+  margin-top: 0.25rem; /* small gap */
 }
