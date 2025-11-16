@@ -316,63 +316,62 @@ section a {
   
 /* === SUMMARY STATS SECTION === */
 
+/* Stats container: remove background + borders + shadow, shrink spacing */
 #stats {
   max-width: 80ch;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: color-mix(in oklch, canvas, var(--color-accent) 5%);
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  box-shadow: 0 2px 12px color-mix(in oklch, var(--border-color), canvas 30%);
+  margin: 2rem auto;
+  padding: 0;                     /* remove padding */
+  background: none;               /* remove background */
+  border: none;                   /* remove border */
+  box-shadow: none;               /* remove shadow */
 }
 
-/* Heading */
+/* Heading: smaller + no underline */
 #stats .stats-heading {
   font-family: system-ui, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.2rem;              /* smaller */
+  font-weight: 600;               
   color: var(--color-accent);
   text-align: center;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 0.3rem;
-  width: fit-content;
-  margin-inline: auto;
+  margin-bottom: 0.5rem;
+  border: none;                   /* remove bottom border */
+  padding: 0;
 }
 
-/* Definition list grid layout */
+/* Stats grid: one clean row, smaller spacing */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
-  gap: 1.25rem 2rem;
+  grid-template-columns: repeat(4, 1fr);  /* 4 stats in one row */
+  gap: 0 1rem;                             /* tight horizontal spacing */
   font-family: system-ui, sans-serif;
-  line-height: 1.4;
+  line-height: 1.1;
+  margin: 0 auto;
 }
 
-/* Label (dt) */
+/* Label (dt): smaller, subtle */
 .stats dt {
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 0.7rem;              /* smaller label */
   color: color-mix(in oklch, var(--text-color), black 20%);
   text-align: center;
-  margin-bottom: 0.3rem;
+  margin: 0;
 }
 
-/* Value (dd) */
+/* Value (dd): smaller and less tall */
 .stats dd {
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;                /* smaller value */
   color: var(--color-accent);
   text-align: center;
   margin: 0;
-  transition: color 0.2s ease, transform 0.15s ease;
+  transition: color 0.15s ease, transform 0.1s ease;
 }
 
-/* Hover interaction */
+/* Optional hover effect — smaller movement */
 .stats dd:hover {
   color: color-mix(in oklch, var(--color-accent), canvas 25%);
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /* Responsive */
@@ -694,4 +693,15 @@ h2.language-header{
   .lightbox .caption {
     font-size: 0.9rem;
   }
+}
+
+.meta-time{
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+
+}
+
+time #commit-time{
+  margin-left: auto;
 }

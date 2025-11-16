@@ -10,22 +10,26 @@
 </head>
 <body>
     <h1>Codebase Meta Analysis</h1>
-      <div id="stats"></div>
-
-      <h2>Commits by Time of Day</h2>
-      <div id="chart"></div>
-
-      <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd><a href="" id="commit-link" target="_blank"></a></dd>
-
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-      </dl>
-    <div class="language">
-      <h2 class="language-header">Language Breakdown</h2>
-      <dl id="language-breakdown" class="stats"></dl>
-      <p id="selection-count">No commits selected</p>
+    <div class="meta-time">
+      <label>
+        Show commits until:
+        <input id="commit-progress" type="range" min="0" max="100" value="10" />
+        <time id="commit-time"></time>
+      </label>
     </div>
+    <div id="stats"></div>
+    <h2>Commits by Time of Day</h2>
+    <div id="chart"></div>
+    <dl id="commit-tooltip" class="info tooltip" hidden>
+      <dt>Commit</dt>
+      <dd><a href="" id="commit-link" target="_blank"></a></dd>
+      <dt>Date</dt>
+      <dd id="commit-date"></dd>
+    </dl>
+  <div class="language">
+    <h2 class="language-header">Language Breakdown</h2>
+    <dl id="language-breakdown" class="stats"></dl>
+    <p id="selection-count">No commits selected</p>
+  </div>
 </body>
 </html>
