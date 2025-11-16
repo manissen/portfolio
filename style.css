@@ -318,53 +318,54 @@ section a {
 
 /* Stats container: remove background + borders + shadow, shrink spacing */
 #stats {
-  max-width: 80ch;
-  margin: 2rem auto;
-  padding: 0;                     /* remove padding */
-  background: none;               /* remove background */
-  border: none;                   /* remove border */
-  box-shadow: none;               /* remove shadow */
+  max-width: 90%;
+  margin: 2rem auto;              /* remove shadow */
 }
 
 /* Heading: smaller + no underline */
 #stats .stats-heading {
   font-family: system-ui, sans-serif;
-  font-size: 1.2rem;              /* smaller */
+  font-size: 2rem;              /* smaller */
   font-weight: 600;               
   color: var(--color-accent);
   text-align: center;
-  margin-bottom: 0.5rem;
-  border: none;                   /* remove bottom border */
+  margin-bottom: 0.5rem;              /* remove bottom border */
   padding: 0;
 }
 
 /* Stats grid: one clean row, smaller spacing */
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);  /* 4 stats in one row */
-  gap: 0 1rem;                             /* tight horizontal spacing */
-  font-family: system-ui, sans-serif;
-  line-height: 1.1;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+  grid-template-rows: auto auto; /* Row 1 = labels, Row 2 = values */
+  gap: 0.5rem 1.5rem;
+  text-align: center;
+}
+
+.stats dt,
+.stats dd {
+  margin: 0;
 }
 
 /* Label (dt): smaller, subtle */
 .stats dt {
-  font-weight: 500;
+  grid-row: 1;
+  margin: 0;
+  font-weight: 400;
   text-transform: uppercase;
-  font-size: 0.7rem;              /* smaller label */
+  font-size: .75rem;              /* smaller label */
   color: color-mix(in oklch, var(--text-color), black 20%);
   text-align: center;
-  margin: 0;
 }
 
 /* Value (dd): smaller and less tall */
 .stats dd {
-  font-weight: 600;
-  font-size: 1rem;                /* smaller value */
+  grid-row: 2;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.5rem;                /* smaller value */
   color: var(--color-accent);
   text-align: center;
-  margin: 0;
   transition: color 0.15s ease, transform 0.1s ease;
 }
 
