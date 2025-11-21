@@ -104,7 +104,10 @@ function renderScatterPlot(data, commits) {
     .domain([0, 24])
     .range([margin.top + usableHeight, margin.top]);
 
-  const xAxis = d3.axisBottom(xScale);
+  const xAxis = d3.axisBottom(xScale)
+  .ticks(5) 
+  .tickFormat(d3.timeFormat("%b %d"));
+
   const yAxis = d3.axisLeft(yScale).tickFormat(d => `${String(d).padStart(2, '0')}:00`);
 
   svg.append('g')
@@ -254,7 +257,10 @@ function updateScatterPlot(filteredCommits) {
   xScale.domain(d3.extent(filteredCommits, d => d.datetime));
 
   // Update x-axis
-  const xAxis = d3.axisBottom(xScale);
+  const xAxis = d3.axisBottom(xScale)
+  .ticks(5)
+  .tickFormat(d3.timeFormat("%b %d"));
+
   const xAxisGroup = svg.select('g.x-axis');
   xAxisGroup.selectAll('*').remove();
   xAxisGroup.call(xAxis);
@@ -289,7 +295,6 @@ function updateScatterPlot(filteredCommits) {
       updateTooltipVisibility(false, event);
     });
 }
-
 
 function onTimeSliderChange() {
   commitProgress = Number(timeSlider.value);
@@ -346,8 +351,43 @@ function onTimeSliderChange() {
     .attr('class', 'loc')
     .attr('style', (d) => `--color: ${colors(d.type)}`);
 
+  // This code updates the div info
+  filesContainer.select('dt > code').text((d) => d.name);
+  updateScatterPlot(filteredCommits);
+}
 
-  d3.select('#scatter-story')
+function updateScatterPlotUntil(maxDatetime) {
+  const filteredCommits = commits.filter(d => d.datetime <= maxDatetime);
+  updateScatterPlot(filteredCommits);
+}
+
+function onStepEnter(response) {
+  const commit = response.element.__data__;
+  console.log(commit.datetime);
+  updateScatterPlotUntil(commit.datetime);
+}
+const data = await loadData();
+let commits = processCommits(data).sort((a, b) => a.datetime - b.datetime);
+
+let xScale, yScale;
+
+let commitProgress = 100;
+
+let timeScale = d3
+  .scaleTime()
+  .domain([
+    d3.min(commits, (d) => d.datetime),
+    d3.max(commits, (d) => d.datetime),
+  ])
+  .range([0, 100]);
+
+let commitMaxTime = timeScale.invert(commitProgress);
+let filteredCommits = commits;
+
+const timeSlider = document.getElementById("commit-progress");
+const timeDisplay = document.getElementById("commit-time");
+
+d3.select('#scatter-story')
     .selectAll('.step')
     .data(commits)
     .join('div')
@@ -368,23 +408,7 @@ function onTimeSliderChange() {
         } files.
 		Then I looked over all I had made, and I saw that it was very good.
 	`,
-    );
-
-  // This code updates the div info
-  filesContainer.select('dt > code').text((d) => d.name);
-  updateScatterPlot(filteredCommits);
-}
-
-function updateScatterPlotUntil(maxDatetime) {
-  const filteredCommits = commits.filter(d => d.datetime <= maxDatetime);
-  updateScatterPlot(filteredCommits);
-}
-
-function onStepEnter(response) {
-  const commit = response.element.__data__;
-  console.log(commit.datetime);
-  updateScatterPlotUntil(commit.datetime);
-}
+);
 
 const scroller = scrollama();
 scroller
@@ -394,25 +418,6 @@ scroller
     offset: 0.5
   })
   .onStepEnter(onStepEnter);
-const data = await loadData();
-let commits = processCommits(data);
-let xScale, yScale;
-
-let commitProgress = 100;
-
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, (d) => d.datetime),
-    d3.max(commits, (d) => d.datetime),
-  ])
-  .range([0, 100]);
-
-let commitMaxTime = timeScale.invert(commitProgress);
-let filteredCommits = commits;
-
-const timeSlider = document.getElementById("commit-progress");
-const timeDisplay = document.getElementById("commit-time");
 
 timeSlider.addEventListener("input", onTimeSliderChange);
 

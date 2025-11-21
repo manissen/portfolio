@@ -337,102 +337,39 @@ section a {
 
 /* === SUMMARY STATS SECTION === */
 
-/* Stats container: remove background + borders + shadow, shrink spacing */
+/* Stats container */
 #stats {
   max-width: 90%;
   margin: 2rem auto;
-  /* remove shadow */
 }
 
-/* Heading: smaller + no underline */
-#stats .stats-heading {
-  font-family: system-ui, sans-serif;
-  font-size: 2rem;
-  /* smaller */
-  font-weight: 600;
-  color: var(--color-accent);
-  text-align: center;
-  margin-bottom: 0.5rem;
-  /* remove bottom border */
-  padding: 0;
-}
-
-/* Stats grid: one clean row, smaller spacing */
+/* DL rendered as a 4-column grid */
 .stats {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 24px;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+  gap: 0.25rem 1rem;
   margin-bottom: 20px;
 }
 
-.stats dt,
-.stats dd {
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Label (dt): smaller, subtle */
+/* dt = first row */
 .stats dt {
-  grid-row: 1;
-  margin: 0;
   font-weight: 400;
   text-transform: uppercase;
   font-size: .75rem;
-  /* smaller label */
   color: color-mix(in oklch, var(--text-color), black 20%);
-  text-align: center;
+  margin: 0;
 }
 
-/* Value (dd): smaller and less tall */
+/* dd = second row */
 .stats dd {
-  grid-row: 2;
-  margin: 0;
   font-weight: 300;
   font-size: 1.5rem;
-  /* smaller value */
   color: var(--color-accent);
-  text-align: center;
-  transition: color 0.15s ease, transform 0.1s ease;
+  margin: 0;
 }
 
-/* Optional hover effect — smaller movement */
-.stats dd:hover {
-  color: color-mix(in oklch, var(--color-accent), canvas 25%);
-  transform: scale(1.03);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  #stats {
-    padding: 1.5rem 1rem;
-  }
-
-  #stats .stats-heading {
-    font-size: 1.4rem;
-  }
-
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Dark mode (inherits your root vars) */
-@media (prefers-color-scheme: dark) {
-  #stats {
-    background-color: color-mix(in oklch, var(--color-accent), canvas 10%);
-    box-shadow: 0 2px 12px oklch(0% 0% 100% / 0.08);
-  }
-
-  .stats dt {
-    color: color-mix(in oklch, beige, var(--color-accent) 30%);
-  }
-
-  .stats dd {
-    color: var(--color-accent);
-  }
-}
-
-/* gidlines */
+/* gridlines */
 .gridlines line {
   stroke: #ccc;
   stroke-opacity: 0.5;
@@ -443,17 +380,11 @@ section a {
   stroke: none;
 }
 
+/* === FIXED dl.info GRID === */
 dl.info {
   display: grid;
-  grid-template-columns: (1fr, 1fr);
-}
-
-.tooltip {
-  position: fixed;
-  top: 1em;
-  left: 1em;
-  margin: 0;
-  padding: 0;
+  grid-template-columns: 1fr 1fr;  /* FIXED */
+  gap: 0.25rem 1rem;
 }
 
 dl.info dt,
@@ -472,6 +403,7 @@ dl.info dd {
   color: #222;
 }
 
+/* Circle animations */
 circle {
   transition: 200ms;
   transform-origin: center;
@@ -482,39 +414,26 @@ circle:hover {
   transform: scale(1.5);
 }
 
-/* Base tooltip styling */
+/* Tooltip base */
 #commit-tooltip.tooltip {
   position: absolute;
   opacity: 0;
   pointer-events: none;
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
-  transition: opacity 0.2s ease;
-  font-size: 0.9rem;
-
-
-  /* ✨ Visual style */
-  background-color: rgba(255, 255, 255, 0.9);
-  /* semi-transparent white */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  /* subtle elevation */
-  border-radius: 0.5rem;
-  /* rounded corners */
   backdrop-filter: blur(8px);
-  /* frosted glass effect */
   padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Make dt/dd use your previous grid layout */
+/* Tooltip dt/dd grid */
 #commit-tooltip dl,
 #commit-tooltip {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.25rem 0.75rem;
   margin: 0;
-  font-size: 0.9rem;
 }
 
 #commit-tooltip dt {
@@ -528,16 +447,15 @@ circle:hover {
   color: #222;
 }
 
-/* Optional: subtle fade/scale effect on show */
 #commit-tooltip.show {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Selection styles */
 @keyframes marching-ants {
   to {
     stroke-dashoffset: -8;
-    /* 5 + 3 */
   }
 }
 
@@ -557,13 +475,9 @@ circle.selected {
 #language-breakdown {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* two equal columns for stats */
-  grid-template-rows: auto;
-  /* first row fits title automatically */
   gap: 1.25rem 2rem;
 }
 
-/* Make the <dl> span full width across both columns */
 div.language {
   max-width: 80ch;
   margin: 2.5rem auto;
@@ -584,7 +498,6 @@ h2.language-header {
   padding-bottom: 0.5rem;
 }
 
-/* Label (dt) */
 #language-breakdown dt {
   font-weight: 600;
   text-transform: uppercase;
@@ -594,7 +507,6 @@ h2.language-header {
   margin-bottom: 0.3rem;
 }
 
-/* Value (dd) */
 #language-breakdown dd {
   font-weight: 700;
   font-size: 1.4rem;
@@ -604,23 +516,20 @@ h2.language-header {
   transition: color 0.2s ease, transform 0.15s ease;
 }
 
-/* Hover effect for fun */
 #language-breakdown dd:hover {
   color: color-mix(in oklch, var(--color-accent), canvas 25%);
   transform: scale(1.05);
 }
 
-/* Selection count text */
 #selection-count {
   grid-column: 1 / -1;
-  /* span both columns */
   text-align: center;
   font-weight: 500;
   margin-top: 2rem;
   color: var(--text-color);
 }
 
-/* USP 4 Carousel */
+/* === Gallery Grid === */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -633,11 +542,11 @@ h2.language-header {
 .gallery figure {
   margin: 0;
   position: relative;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
   border-radius: 0.75rem;
+  background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
   transition: transform 0.2s ease;
 }
 
@@ -649,7 +558,6 @@ h2.language-header {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  display: block;
 }
 
 .gallery figcaption {
@@ -660,19 +568,16 @@ h2.language-header {
   border-top: 1px solid #eee;
 }
 
-/* === Lightbox Overlay === */
+/* === Lightbox === */
 .lightbox {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  inset: 0;
   display: none;
-  align-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.85);
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
+  align-items: center;
   z-index: 1000;
 }
 
@@ -689,31 +594,26 @@ h2.language-header {
   margin-bottom: 1rem;
 }
 
-/* === Lightbox Caption === */
 .lightbox .caption {
   max-width: 80%;
-  text-align: center;
   color: #fff;
-  font-size: 1rem;
-  line-height: 1.4;
+  text-align: center;
   background: rgba(0, 0, 0, 0.4);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 }
 
-/* === Close Button === */
 .close-btn {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
   font-size: 2rem;
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
   padding: 0.25rem 0.6rem;
-  line-height: 1;
+  border-radius: 50%;
   transition: background 0.3s;
 }
 
@@ -725,55 +625,52 @@ h2.language-header {
   .gallery img {
     height: 200px;
   }
-
-  .lightbox .caption {
-    font-size: 0.9rem;
-  }
 }
 
+/* === Meta Time === */
 .meta-time {
   display: flex;
   flex-direction: column;
-  /* stack children vertically */
   width: 100%;
 }
 
 .meta-time label {
   display: flex;
   flex-direction: column;
-  /* stack slider and time vertically */
   width: 100%;
 }
 
 #commit-progress {
   width: 100%;
-  /* slider spans full width */
 }
 
 #commit-time {
   align-self: flex-end;
-  /* move time to the right under slider */
   margin-top: 0.25rem;
-  /* small gap */
 }
 
+/* === Files Section Fix === */
 #files {
   display: grid;
   grid-template-columns: 1fr 4fr;
+}
 
-  >div {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-  }
+#files > div {
+  display: grid;
+  grid-template-columns: inherit; /* FIXED */
+}
 
-  dt {
-    grid-column: 1;
-  }
+#files dt {
+  grid-column: 1;
+}
 
-  dd {
-    grid-column: 2;
-  }
+#files dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
 }
 
 .loc {
@@ -784,20 +681,9 @@ h2.language-header {
   border-radius: 50%;
 }
 
-dd {
-  grid-column: 2;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  align-content: start;
-  gap: 0.15em;
-  padding-top: 0.6em;
-  margin-left: 0;
-}
-
 dt code,
 dt small {
-  display: block; /* forces one element per line */
+  display: block;
 }
 
 dt small {
@@ -806,14 +692,14 @@ dt small {
   margin-top: 2px;
 }
 
+/* === Scrolly Section === */
 #scrolly-1 {
-  position: relative;
   display: flex;
   gap: 1rem;
+}
 
-  > * {
-    flex: 1;
-  }
+#scrolly-1 > * {
+  flex: 1;
 }
 
 #scatter-story {
@@ -823,7 +709,5 @@ dt small {
 #scatter-plot {
   position: sticky;
   top: 0;
-  left: 0;
-  bottom: auto;
   height: 50vh;
 }
