@@ -250,23 +250,27 @@ function renderLanguageBreakdown(selection) {
 function updateScatterPlot(filteredCommits) {
   const svg = d3.select('#chart').select('svg');
 
-  // Update xScale domain
+  // Update scale
   xScale.domain(d3.extent(filteredCommits, d => d.datetime));
 
   // Update x-axis
   const xAxis = d3.axisBottom(xScale);
   const xAxisGroup = svg.select('g.x-axis');
-  xAxisGroup.selectAll('*').remove(); // clear old axis
+  xAxisGroup.selectAll('*').remove();
   xAxisGroup.call(xAxis);
 
-  // Update dots
+  // Recompute radii
   const [minLines, maxLines] = d3.extent(filteredCommits, d => d.totalLines);
   const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
 
+  // Sorted commits (for overlap)
+  const sorted = d3.sort(filteredCommits, d => -d.totalLines);
+
   const dots = svg.select('g.dots');
 
-  dots.selectAll('circle')
-    .data(filteredCommits)
+  dots
+    .selectAll('circle')
+    .data(sorted, d => d.id)   // 🔥 VERY IMPORTANT for stability
     .join('circle')
     .attr('cx', d => xScale(d.datetime))
     .attr('cy', d => yScale(d.hourFrac))
@@ -285,6 +289,7 @@ function updateScatterPlot(filteredCommits) {
       updateTooltipVisibility(false, event);
     });
 }
+
 
 function onTimeSliderChange() {
   commitProgress = Number(timeSlider.value);
@@ -320,8 +325,8 @@ const timeSlider = document.getElementById("commit-progress");
 const timeDisplay = document.getElementById("commit-time");
 
 timeSlider.addEventListener("input", onTimeSliderChange);
-onTimeSliderChange();
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
 renderTooltipContent(commits);
+onTimeSliderChange();
