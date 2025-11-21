@@ -360,15 +360,14 @@ section a {
 /* Stats grid: one clean row, smaller spacing */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
-  grid-template-rows: auto auto;
-  /* Row 1 = labels, Row 2 = values */
-  gap: 0.5rem 1.5rem;
-  text-align: center;
+  grid-template-columns: auto 1fr;
+  gap: 8px 24px;
+  margin-bottom: 20px;
 }
 
 .stats dt,
 .stats dd {
+  font-weight: bold;
   margin: 0;
 }
 
@@ -781,7 +780,7 @@ h2.language-header {
   display: flex;
   width: 0.5em;
   aspect-ratio: 1;
-  background: steelblue;
+  background: var(--color);
   border-radius: 50%;
 }
 
@@ -794,4 +793,37 @@ dd {
   gap: 0.15em;
   padding-top: 0.6em;
   margin-left: 0;
+}
+
+dt code,
+dt small {
+  display: block; /* forces one element per line */
+}
+
+dt small {
+  font-size: 0.8em;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scatter-story {
+  position: relative;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  height: 50vh;
 }

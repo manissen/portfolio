@@ -302,26 +302,31 @@ function onTimeSliderChange() {
   filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
 
   let lines = filteredCommits.flatMap((d) => d.lines);
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
   let files = d3
     .groups(lines, (d) => d.file)
     .map(([name, lines]) => {
       return { name, lines };
     })
     .sort((a, b) => b.lines.length - a.lines.length);
-
+  
   let filesContainer = d3
     .select('#files')
     .selectAll('div')
     .data(files, d => d.name)
     .join(
       enter => {
-        const div = enter.append('div');
+      const div = enter.append('div');
 
-        div.append('dt').append('code');
-        div.append('dd')
-          .classed('file-lines', true); // give it a class so we can select it later
-        return div;
-      },
+      const dt = div.append('dt');
+      dt.append('code');
+      dt.append('small');   // ⬅ Add this
+
+      div.append('dd')
+        .classed('file-lines', true);
+
+      return div;
+    },
       update => update,
       exit => exit.remove()
     );
@@ -337,7 +342,8 @@ function onTimeSliderChange() {
     .selectAll('div')
     .data(d => d.lines)
     .join('div')
-    .attr('class', 'loc');
+    .attr('class', 'loc')
+    .attr('style', (d) => `--color: ${colors(d.type)}`);
 
 
   // This code updates the div info
