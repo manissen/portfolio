@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta</title>
-    <link rel="stylesheet" href="../style.css">
-    <script src="../global.js" type="module"></script>
-    <script src="main.js" type="module"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../global.js" type="module"></script>
+  <script src="main.js" type="module"></script>
 </head>
+
 <body>
-    <h1>Codebase Meta Analysis</h1>
-    <div id="stats"></div>
-    <div class="meta-time">
-      <label>
-        Show commits until:
-        <input id="commit-progress" type="range" min="0" max="100" value="10" />
-        <time id="commit-time"></time>
-      </label>
+  <h1>Codebase Meta Analysis</h1>
+  <div id="stats"></div>
+  <div class="meta-time">
+    <label>
+      Show commits until:
+      <input id="commit-progress" type="range" min="0" max="100" value="0" />
+      <time id="commit-time"></time>
+    </label>
+  </div>
+  <dl id="files"></dl>
+  <div id="scrolly-1">
+    <div id="scatter-story"></div>
+    <div id="scatter-plot">
+      <h2>Commits by Time of Day</h2>
+      <div id="chart"></div>
+      <dl id="commit-tooltip" class="info tooltip" hidden>
+        <dt>Commit</dt>
+        <dd><a href="" id="commit-link" target="_blank"></a></dd>
+        <dt>Date</dt>
+        <dd id="commit-date"></dd>
+      </dl>
+      <div class="language">
+        <h2 class="language-header">Language Breakdown</h2>
+        <dl id="language-breakdown" class="stats"></dl>
+        <p id="selection-count">No commits selected</p>
+      </div>
     </div>
-    <dl id="files"></dl>
-    <h2>Commits by Time of Day</h2>
-    <div id="chart"></div>
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-      <dt>Commit</dt>
-      <dd><a href="" id="commit-link" target="_blank"></a></dd>
-      <dt>Date</dt>
-      <dd id="commit-date"></dd>
-    </dl>
-  <div class="language">
-    <h2 class="language-header">Language Breakdown</h2>
-    <dl id="language-breakdown" class="stats"></dl>
-    <p id="selection-count">No commits selected</p>
   </div>
   <dl id="files"></dl>
 </body>
+
 </html>
