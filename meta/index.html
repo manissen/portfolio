@@ -14,19 +14,21 @@
   <h1>Codebase Meta Analysis</h1>
   <div id="stats"></div>
   <div class="meta-time">
-    
-  </div>
-  <dl id="files"></dl>
+</div>
   <div id="scrolly-1">
-    <div id="scatter-story"></div>
+    <div class="story-col">
+      <dl id="files"></dl>
+      <div id="scatter-story"></div>
+    </div>
     <div id="scatter-plot">
-      <h2>Commits by Time of Day</h2>
-      <div id="chart"></div>
+      <div id="chart">
+        <h2>Commits by Time of Day</h2>
+      </div>
       <label>
-      Show commits until:
-      <input id="commit-progress" type="range" min="0" max="100" value="0" />
-      <time id="commit-time"></time>
-    </label>
+        Show commits until:
+        <input id="commit-progress" type="range" min="0" max="100" value="0" />
+        <time id="commit-time"></time>
+      </label>
       <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
         <dd><a href="" id="commit-link" target="_blank"></a></dd>
@@ -40,7 +42,6 @@
       </div>
     </div>
   </div>
-  <dl id="files"></dl>
 </body>
 
 </html>
