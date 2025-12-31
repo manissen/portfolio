@@ -1,5 +1,12 @@
 [
     {
+        "title": "Califonia Wildfires",
+        "year": "2025",
+        "image": "/images/dsc-106-final-2.png",
+        "url": "https://m1chun.github.io/where-california-burns/",
+        "description": "Used CalFire data to visualize where California burns and possible reasons for its high fire density (or lack thereof)"
+    },
+    {
         "title": "Boston Bike Traffic",
         "year": "2025",
         "image": "/images/dsc_lab7_pic.png",
@@ -49,37 +56,10 @@
         "description": "Dolorum unde ratione commodi nobis quis? Quia, illo nam totam praesentium in autem optio quisquam itaque numquam dicta laborum ipsam dignissimos provident quo! Corrupti enim dolor, voluptatibus quod magni a!"
     },
     {
-        "title": "COGS 9 Final Project",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Velit nihil dolores aliquid! Laborum, dolore commodi? Quos aperiam, soluta aliquam non sint dolorum fugit deserunt veniam. Dolor, obcaecati. Modi ad doloribus ratione dolor temporibus voluptatem exercitationem enim molestiae fugiat!"
-    },
-    {
         "title": "DSC10 Midterm Project",
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "url": "",
         "description": "Sed, facere reiciendis. Natus debitis eligendi sunt in alias aperiam voluptas numquam adipisci, ipsam, ad vero reprehenderit minima amet possimus quibusdam recusandae fuga illo excepturi. Explicabo porro obcaecati deleniti optio!"
-    },
-    {
-        "title": "DSC 20 Project - Image Rendering",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "url": "",
-        "description": "Soluta tempore saepe vel neque adipisci omnis optio, asperiores molestias alias similique facilis recusandae obcaecati nemo sed officiis minima cupiditate at, veritatis nisi esse pariatur. Aut sequi autem quis dolorum?"
-    },
-    {
-        "title": "Incidunt sapiente exercitationem reprehenderit.",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "url": "",
-        "description": "Nulla modi voluptas quia eius nostrum esse, dolor doloribus commodi aperiam illum et illo error eos molestias eaque rem dignissimos. Eum, quibusdam commodi. Laboriosam eveniet, qui sunt dolore quia rerum."
-    },
-    {
-        "title": "Vitae, error tempore? Tempore!",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "url": "",
-        "description": "Dignissimos asperiores adipisci nemo quia eligendi cum. Architecto fuga eligendi blanditiis tempore. Modi, repudiandae molestias. Aut, sapiente doloribus et esse iste consequuntur incidunt cupiditate officia sequi! Mollitia quasi at architecto."
     }
 ]

@@ -129,20 +129,11 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       ? `<a class="project-link" href="${project.url}" rel="noopener">View Project →</a>`
       : "";
 
-    // ✅ Fix: use correct element and URL resolution
-    let imgSrc = '';
-    if (project.image) {
-      imgSrc = project.image.startsWith('http')
-        ? project.image
-        : `${BASE_PATH}${project.image.replace(/^\.\//, '').replace(/^\.{2}\//, '')}`;
-    }
-
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <h4>${project.year}</h4>
-      ${imgSrc ? `<img src="${imgSrc}" alt="${project.title}">` : ''}
-      <p>${shortDescription}</p>
-      ${projectLink}
+      <img src="${BASE_PATH}${project.image.replace(/^\/+/, '')}">
+      <p>${shortDescription} <br> ${projectLink}</p>
     `;
 
     containerElement.appendChild(article);
